@@ -1,0 +1,8 @@
+{
+ "n_moved": 221,
+ "share_moved": 0.10962301587301587,
+ "neighbors_same_type_kmeans_mean": 0.31879835190320277,
+ "neighbors_same_type_kefrin_mean": 0.48261465115867974,
+ "all_mo_same_type_kmeans": 0.5079884781190283,
+ "all_mo_same_type_kefrin": 0.5333573814033111
+}

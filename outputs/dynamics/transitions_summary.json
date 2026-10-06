@@ -1,0 +1,15 @@
+{
+ "mo_with_switches": 123,
+ "directed": 88,
+ "returning": 35,
+ "persistent_events": 151,
+ "directed_level_change_median_pct": 3.5204229881287463,
+ "all_level_change_median_pct": 0.5657943935023946,
+ "directed_by_region": {
+  "Приморский край": 8,
+  "Свердловская область": 7,
+  "Калининградская область": 5,
+  "Ленинградская область": 4,
+  "Московская область": 4
+ }
+}

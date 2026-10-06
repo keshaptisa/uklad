@@ -1,0 +1,13 @@
+{
+ "held_out_all_above_random": true,
+ "held_out_wage_eta2": 0.7316106548957796,
+ "held_out_wage_eta2_main": 0.7576790433079411,
+ "held_out_emp_eta2_mean": 0.29781479086416424,
+ "transitions_tested": 88,
+ "transitions_significant": 0,
+ "transitions_p05": 28,
+ "transitions_p05_expected": 4.4,
+ "transitions_binom_p": 1.4070842673845131e-15,
+ "shift_median_movers": 0.051114402831625605,
+ "shift_median_stable": 0.014311215615748663
+}

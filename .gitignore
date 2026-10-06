@@ -1,0 +1,18 @@
+data/raw/
+refs/
+__pycache__/
+*.pyc
+.venv/
+data/processed/
+outputs/**/*.npz
+scratch/
+third_party/
+logs/
+
+# исходник фото автора (в лендинг встраивается обрезанная копия site_src/assets/author.jpg)
+photo_*.jpg
+
+# рабочие заметки и текст задания — не для публикации
+NOTES.md
+tz.txt
+.pytest_cache/

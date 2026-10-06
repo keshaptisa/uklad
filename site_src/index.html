@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Уклад - шесть экономик России</title>
+<meta name="description" content="Типы локальных экономик России по данным СберИндекса и Росстата: атлас, динамика, ритм и методы.">
+<style>/*STYLES*/</style>
+</head>
+<body class="intro-on">
+<div id="intro" class="intro" role="dialog" aria-label="Уклад - шесть экономик России">
+  <canvas id="intro-cv" aria-hidden="true"></canvas>
+  <div class="intro-vignette" aria-hidden="true"></div>
+  <div class="intro-in">
+    <p class="intro-kicker">Трек «Кластеризация»</p>
+    <h1 class="intro-title" aria-label="Уклад"><span>У</span><span>к</span><span>л</span><span>а</span><span>д</span></h1>
+    <p class="intro-sub">шесть экономик России</p>
+    <button class="intro-go" id="intro-go">Начать</button>
+  </div>
+</div>
+<div class="progress" id="progress"></div>
+<header class="top" id="top">
+  <div class="wrap top-in">
+    <a class="brand" href="#"><span class="logo brand-u">У</span>Уклад</a>
+    <nav>
+      <a href="#method">Метод</a><a href="#atlas">Атлас</a><a href="#network">Сеть</a><a href="#types">Типы</a><a href="#stories-sec">Истории</a>
+      <a href="#rhythm">Ритм</a><a href="#dynamics">Динамика</a><a href="#quality">Качество</a><a href="#author">Об авторе</a>
+    </nav>
+    <button id="theme" class="theme-btn" aria-label="Переключить тему"><span class="knob"></span></button>
+  </div>
+</header>
+
+<section class="hero wrap">
+  <p class="kicker">Трек «Кластеризация»</p>
+  <h1><span class="kword grad-text">Шесть</span> типов локальных экономик России</h1>
+  <p class="lead">Мы смотрим на муниципалитет с двух сторон: <b>чем он живёт</b> (зарплаты, отрасли и население по данным Росстата)
+    и <b>как в нём тратят</b> (безналичные расходы жителей за 24 месяца по данным СберИндекса). Муниципалитеты с похожими тратами
+    связаны в сеть из 2 016 территорий, и кластеризация этой сети даёт <span class="kword-l">шесть</span> устойчивых типов.</p>
+  <div class="hero-cta"><a class="btn primary" href="#atlas">Открыть атлас <span class="arr">→</span></a><a class="btn secondary" href="#method">Как это сделано</a><button class="btn secondary" id="dl-csv">↓ Скачать типы МО (CSV)</button></div>
+  <div class="stats stagger" id="hero-stats"></div>
+</section>
+
+<section id="method" class="wrap reveal">
+  <h2>Метод ДУЭТ: четыре шага</h2>
+  <p class="sub">ДУЭТ означает типологию по двум взглядам с эволюционным отслеживанием. Атрибуты показывают, чем МО живёт, рёбра показывают, как в нём тратят, а память связывает 24 месяца.</p>
+  <div class="flow" aria-label="Схема решения">
+    <div class="node"><b>Данные</b><span>СберИндекс: траты 24 мес.<br>Росстат: отрасли, зарплаты</span></div><i class="arrow"></i>
+    <div class="node split"><div><b>Атрибуты</b><span>чем живёт МО</span></div><div><b>Рёбра</b><span>как тратит МО</span></div></div><i class="arrow"></i>
+    <div class="node accent"><b>KEFRiN</b><span>признаки + сеть вместе</span></div><i class="arrow"></i>
+    <div class="node"><b><span class="knum">6</span> типов</b><span>устойчивых на бутстрапе</span></div><i class="arrow"></i>
+    <div class="node"><b>24 месяца</b><span>эволюционное отслеживание</span></div>
+  </div>
+  <ol class="steps stagger">
+    <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><h3>Атрибуты</h3><p class="gist">Чем живёт МО: зарплаты, отрасли, население</p>
+      <div class="fact"><b>11</b> признаков · Росстат + СберИндекс</div>
+      <details><summary>Подробнее</summary><p>Средняя зарплата, население, доля горожан, доступность рынков, занятость по шести отраслям
+        и уровень трат на жителя. Для районов Москвы и Петербурга занятость взята по городу целиком: жители спальных районов работают по всему городу.</p></details></li>
+    <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M7.3 11l9.4-4.8M7.3 13l9.4 4.8"/></svg></span><h3>Рёбра</h3><p class="gist">Как тратит МО: похожие траектории трат связаны</p>
+      <div class="fact"><b>15</b> соседей у каждого МО · DTW</div>
+      <details><summary>Подробнее</summary><p>Сходство 24-месячных рядов трат (уровень и корзина: еда, здоровье, маркетплейсы, общепит, транспорт)
+        считается динамическим выравниванием (DTW). Сравнили восемь правил ребра: косинус, гауссово ядро, корреляцию, лаговую корреляцию, DTW, дороги, контекст и их слияние SNF.</p></details></li>
+    <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="3"/></svg></span><h3>Кластеризация</h3><p class="gist">Признаки и сеть вместе - метод KEFRiN</p>
+      <div class="fact"><b class="knum">6</b> устойчивых типов · 13 методов сравнено</div>
+      <details><summary>Подробнее</summary><p>KEFRiN (Шалилех и Миркин, 2022) - k-means, который одновременно приближает атрибуты МО и его строку связей.
+        Число типов - наибольшее, при котором каждый тип устойчив на бутстрапе (критерий Хеннига).</p></details></li>
+    <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg></span><h3>Динамика</h3><p class="gist">Типы прослежены по 24 помесячным сетям</p>
+      <div class="fact"><b>3+</b> месяца - смена типа засчитана</div>
+      <details><summary>Подробнее</summary><p>Эволюционная кластеризация: каждый месяц начинается с прошлого разбиения и помнит историю,
+        поэтому случайные колебания не выдаются за смену типа.</p></details></li>
+  </ol>
+</section>
+
+<section id="atlas" class="wrap reveal">
+  <h2>Атлас</h2>
+  <p class="sub">Выберите тип, наведите на МО - подсказка, нажмите - паспорт. Ползунок показывает тип по месяцам.</p>
+  <div class="controls">
+    <div class="seg" id="mode">
+      <button data-m="type" class="on">Типы</button><button data-m="spend">Траты на жителя</button><button data-m="rhythm">Ритм</button>
+    </div>
+    <input id="search" list="mo-list" placeholder="Найти МО…" autocomplete="off"><datalist id="mo-list"></datalist>
+  </div>
+  <div class="chips" id="chips"></div>
+  <div class="atlas">
+    <div class="map-box">
+      <svg id="map" role="img" aria-label="Карта муниципальных образований России"></svg>
+      <div class="insets"><div><span>Москва</span><svg id="inset-msk"></svg></div><div><span>Санкт-Петербург</span><svg id="inset-spb"></svg></div></div>
+      <div class="month-row"><button id="play" class="ghost">▶</button><input type="range" id="month" min="0" max="23" value="23"><span id="month-label"></span></div>
+      <div id="map-legend" class="legend"></div>
+    </div>
+    <aside id="passport" class="passport"><p class="muted">Нажмите на муниципалитет на карте или найдите его по названию.</p></aside>
+  </div>
+  <div class="atlas-foot"><button class="btn secondary sm" id="share-mo">Скопировать ссылку на МО</button></div>
+  <h3 class="h-sub">Сравнить два МО</h3>
+  <div class="cmp-box">
+    <div class="cmp-inputs"><input id="cmp-a" list="mo-list" placeholder="Первое МО…" autocomplete="off">
+      <button class="ghost" id="cmp-swap" aria-label="Поменять местами">⇄</button>
+      <input id="cmp-b" list="mo-list" placeholder="Второе МО…" autocomplete="off"></div>
+    <div id="cmp-out"></div>
+  </div>
+</section>
+
+<section id="network" class="wrap reveal">
+  <h2>Сеть: как связаны муниципалитеты</h2>
+  <p class="sub">Каждая точка - МО, цвет - его тип. Сначала точки стоят на своих местах на карте; затем они перестраиваются по связям
+    сети: рядом оказываются МО с похожими траекториями трат, где бы они ни находились. Столицы и ресурсные территории сеть собирает в отдельные «острова» сама. А аграрные и бюджетные районы
+    по тратам перемешаны - их различает экономическая база (отрасли, зарплаты), которой в рёбрах нет. Поэтому типы строятся по сети
+    и признакам <b>вместе</b>: по отдельности ни то, ни другое их не даёт. Наведите на точку - подсветятся её связи; нажмите - откроется паспорт МО.</p>
+  <div class="controls"><div class="seg" id="net-mode"><button data-t="0" class="on">Карта</button><button data-t="1">Сеть</button></div></div>
+  <div class="two net-two">
+    <div class="chart-box" id="net-box"><canvas id="net-cv" aria-label="Сеть муниципальных образований"></canvas><div class="legend" id="net-legend"></div></div>
+    <div class="chart-box"><h3>Сеть в цифрах</h3><div class="gap-stats" id="net-stats"></div></div>
+  </div>
+</section>
+
+<section id="types" class="wrap reveal">
+  <h2><span class="kword">Шесть</span> типов</h2>
+  <p class="sub">Медианы по типу. «Формула типа» - описание в духе анализа формальных понятий (Кузнецов): условие, которому удовлетворяют МО,
+    его точность (какая доля подходящих МО принадлежит типу) и покрытие (какую долю типа оно описывает).</p>
+  <div class="cards" id="cards"></div>
+  <h3 class="h-sub">Отпечатки типов: чем каждый отличается от России</h3>
+  <p class="sub">Клетка - насколько медиана типа выше (зелёный) или ниже (красный) медианы страны, в стандартных отклонениях. Наведите, чтобы увидеть число.</p>
+  <div id="fingerprint" class="fp-wrap"></div>
+</section>
+
+<section id="stories-sec" class="wrap reveal">
+  <h2>Пять историй</h2>
+  <p class="sub">Что типология говорит о конкретных муниципалитетах. Все числа в карточках считаются из данных; нажмите - МО откроется на карте.</p>
+  <div class="stories stagger" id="stories"></div>
+</section>
+
+<section id="engel" class="wrap reveal">
+  <h2>Ландшафт Энгеля</h2>
+  <p class="sub">Закон Энгеля: чем выше доход, тем меньшая доля уходит на еду. Каждая точка - МО: по горизонтали траты на жителя,
+    по вертикали доля продовольствия. Запустите время - 2 016 точек проходят 24 месяца. Видно, как типы занимают свои «высоты» ландшафта,
+    как каждый декабрь всё облако прыгает вправо (траты на 20% выше обычного месяца) и как за два года оно опускается:
+    медианная доля еды снизилась с 45,3% до 42,4%, а доля маркетплейсов выросла с 9,3% до 19,2% - волна онлайн-покупок.
+    Выберите тип - чёрная линия покажет путь его медианного МО.</p>
+  <div class="controls"><div class="chips" id="engel-chips"></div></div>
+  <div class="chart-box"><svg id="engel-svg"></svg>
+    <div class="month-row"><button id="engel-play" class="ghost">▶</button><input type="range" id="engel-month" min="0" max="23" value="0"><span id="engel-label"></span></div>
+  </div>
+</section>
+
+<section id="gap" class="wrap reveal">
+  <h2>Кто уходит в отрыв</h2>
+  <p class="sub" id="gap-lead"></p>
+  <div class="two">
+    <div class="chart-box"><h3>Траты на жителя к медиане России, %</h3><svg id="gap-svg"></svg></div>
+    <div class="chart-box"><h3>Разрыв между МО и роль типа</h3><div id="gap-stats" class="gap-stats"></div></div>
+  </div>
+</section>
+
+<section id="rhythm" class="wrap reveal">
+  <h2>Ритм: когда тратят</h2>
+  <p class="sub">Вычтем из трат каждого МО общероссийский сезон и собственный тренд. У 86% МО остаётся шум, а у 290 МО - свой ритм,
+    повторившийся и в 2023, и в 2024 году (выше 95-го перцентиля случайных пар). Это четыре ритма - четыре «часов»: год идёт по кругу
+    по часовой стрелке от января сверху, удаление от круга - насколько траты выше или ниже обычного.</p>
+  <div class="clocks" id="clocks"></div>
+</section>
+
+<section id="dynamics" class="wrap reveal">
+  <h2>Динамика: кто сменил тип</h2>
+  <p class="sub">Типы устойчивы: экономическая база меняется медленно, и за два года ни один тип не распался и не слился с другим.
+    Смены сосредоточены на границах типов. Часть из них - «сезонные качели»: северный город летом живёт как отдалённый центр,
+    а к декабрю возвращается. Направленные переходы объясняются тем, как менялся уровень трат МО относительно страны.</p>
+  <div class="two">
+    <div class="chart-box"><h3>Смен типа за месяц</h3><svg id="switch-svg"></svg></div>
+    <div class="chart-box"><h3>Январь 2023 → декабрь 2024</h3><svg id="flow-svg"></svg></div>
+  </div>
+  <h3 style="margin-top:18px">Кто сменил тип насовсем</h3>
+  <p class="sub">Насколько это надёжно: как группа смены реальны (отрыв к новому типу в 3,6 раза сильнее, чем у МО без смен), но для каждого отдельного МО переход после строгой поправки на множественность не доказан. Конкретные МО ниже лучше считать кандидатами для проверки.</p>
+  <p class="sub" id="dir-lead"></p>
+  <div id="dir-table"></div>
+  <div id="dyn-table"></div>
+</section>
+
+<section id="quality" class="wrap reveal">
+  <h2>Качество и сравнение методов</h2>
+  <p class="sub">Шесть внутренних индексов качества из задания (ICVI): в пространстве признаков SW (силуэт), CH (Калински–Харабаш), S_Dbw;
+    в сети AVI (изолированность), AVU (слитость), MQ (модулярность). Формулы AVI/AVU/MQ сверены с библиотекой Pattern
+    Лаборатории СберИндекс. Рейтинг - пороговое агрегирование Алескерова: метод не может «купить» место провалом по одному индексу.</p>
+  <div id="methods-table"></div>
+  <div class="chart-box" style="margin-top:16px"><h3>Карта компромисса: признаки против сети</h3>
+    <p class="sub">Каждая точка - метод. По горизонтали - насколько типы лучше случайных в пространстве признаков (z-оценки SW, CH, S_Dbw против случайных меток, каждая - в долях от лучшего метода, затем среднее),
+      по вертикали - в сети (AVI, AVU, MQ). Размер точки - устойчивость на бутстрапе. Методы «только по сети» сильны в сети и слабы в признаках.
+      Графовые нейросети выше всех по сети, а DMoN по z-оценкам почти догоняет KEFRiN и в признаках, но их точки мелкие: на подвыборках
+      типы меняются (бутстрап 0,52–0,63 против 0,94 у KEFRiN), а экономический тип не должен зависеть от того, какие МО попали в выборку.
+      KEFRiN - крупная точка в правом нижнем кластере: выше k-means по сети почти при той же компактности.</p>
+    <svg id="pareto-svg"></svg></div>
+  <h3 class="h-sub">Устойчив ли рейтинг: восемь вариантов</h3>
+  <p class="sub">Место метода при разных правилах агрегирования (Алескеров или Борда), с индексом AVU и без, с бутстрап-устойчивостью и без.</p>
+  <div id="variants-table"></div>
+  <div class="two">
+    <div class="chart-box"><h3>Выбор числа типов</h3><svg id="k-svg"></svg></div>
+    <div class="chart-box"><h3>Правила ребра: что они измеряют</h3><div id="edges-table"></div></div>
+  </div>
+</section>
+
+<section id="author" class="wrap reveal">
+  <h2>Об авторе</h2>
+  <div class="author-card">
+    <!--AUTHOR_PHOTO-->
+    <div class="author-body">
+      <h3 class="author-name">Алиса Недозорова</h3>
+      <p class="author-role">ИТМО · «Инженерия искусственного интеллекта» · Санкт-Петербург</p>
+      <div class="author-stack" aria-label="Инструменты проекта">
+        <span>Python</span><span>scikit-learn</span><span>PyTorch</span>
+      </div>
+      <ul class="author-links">
+        <li><span>Почта</span><a href="mailto:alisanedoz@gmail.com">alisanedoz@gmail.com</a></li>
+        <li><span>Telegram</span><a href="https://t.me/keshaptisa">@keshaptisa</a></li>
+        <li><span>GitHub</span><a href="https://github.com/keshaptisa">github.com/keshaptisa</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="glossary-sec" class="wrap reveal">
+  <h2>Словарь</h2>
+  <p class="sub">Термины подчёркнуты пунктиром по всей странице - наведите, чтобы прочитать пояснение.</p>
+  <div class="glossary" id="glossary"></div>
+</section>
+
+<footer class="wrap foot">
+  <p>Данные: СберИндекс - потребительские безналичные расходы на уровне МО, индекс доступности рынков, автодорожные связи, справочник границ МО,
+    индекс покупательской мобильности (CC BY-SA 4.0); Росстат, БД показателей муниципальных образований через каталог «Если быть точным» (CC BY 4.0).
+    Код, конфигурации и методологический отчёт - в репозитории проекта.</p>
+</footer>
+<div id="tip" class="tip" hidden></div>
+<button class="to-top" id="to-top" aria-label="Наверх">↑</button>
+<script>/*D3*/</script>
+<script>window.GEO=/*GEO*/;window.DATA=/*DATA*/;</script>
+<script>/*APP*/</script>
+</body>
+</html>
